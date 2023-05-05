@@ -84,7 +84,7 @@ for ($i = 1; $i -le $create; $i++) {
     }
 }
 
-Write-Output "`nScript terminated with $error_counter errors.`n"
+Write-Output "`nScript finished with $error_counter errors.`n"
 
 <#
 
