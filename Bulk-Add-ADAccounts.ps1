@@ -31,6 +31,7 @@ $dc_distinguished = ("DC=", ($domain.Split(".").trim() -join ",DC=") -join "")
 $ou_distinguished = ("OU=", ($ou_directories -join ",OU=") -join "")
 $full_path = "$ou_distinguished,$dc_distinguished"
 $ou_parents = $dc_distinguished
+$error_counter = 0
 [array]::reverse($ou_directories)
 
 if ($csv) {
@@ -48,6 +49,7 @@ for ($i = 0; $i -lt $ou_directories.Count; $i++) {
         $message = $_
         if ($message -inotmatch "already in use") {
             Write-Output ("[", $ou_directories[$i], "]: ", $_.Exception.Message -join "")
+            $error_counter++
         }
     }
 }
@@ -78,8 +80,11 @@ for ($i = 1; $i -le $create; $i++) {
         } else {
             Write-Output ("[$given]: ", $_.Exception.Message -join "")
         }
+        $error_counter++
     }
 }
+
+Write-Output "`nScript terminated with $error_counter errors.`n"
 
 <#
 
