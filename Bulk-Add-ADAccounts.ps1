@@ -67,11 +67,11 @@ for ($i = 1; $i -le $Create; $i++) {
 
         } elseif ($Computer) {
             $given = ($Names, "_", ([string]($i)).padleft(($Create.count + 1), "0") -join "")
-            New-ADComputer -Name $given -AccountPassword $secret -Path $full_path -Description $description -Enabled 1 -ChangePasswordAtLogon 0 -ErrorAction Stop
+            New-ADComputer -Name $given -AccountPassword $secret -Path $full_path -Description $description -Enabled 1 -ChangePasswordAtLogon 1 -ErrorAction Stop
 
         } else {
             $given = ($Names, "_", ([string]($i)).padleft(($Create.count + 1), "0") -join "")
-            New-ADUser -Name $given -AccountPassword $secret -Path $full_path -Description $description -Enabled 1 -ChangePasswordAtLogon 0 -ErrorAction Stop
+            New-ADUser -Name $given -AccountPassword $secret -Path $full_path -Description $description -Enabled 1 -ChangePasswordAtLogon 1 -ErrorAction Stop
         }
     }
     catch {
